@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+    <style>
+        .bg{
+            background: #0066cc;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 模板 -->
+    <div id="demo">
+        <!-- 内容会被模板忽略 -->
+        <span>你好</span>
+    </div>
+    <script type="x-template" id="temp">
+        <div>script模板</div>
+    </script>
+    <script>
+        // 数据
+        let data = {
+            message: 'world'
+        }
+
+        // Vm实例
+        new Vue({
+            el: '#demo',
+            data: data,
+            render(createElement){
+                return createElement(
+                    // 创建元素
+                    'ul',
+                    // 数据对象
+                    {
+                        class: {bg: true},
+                        style: {fontSize: '20px'},
+                        attrs: {abc: 'abc'},
+                        domProps: {
+                            innerHTML: '<li>dom</li>'
+                        }
+                    }, 
+                    [
+                        // 创建子元素
+                        createElement('li', 1),
+                        createElement('li', 2),
+                        createElement('li', 3),
+                    ]
+                )
+
+            }
+        })
+    </script>
+</body>
+
+</html>

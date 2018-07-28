@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- 模板 -->
+    <div id="demo">
+        <p v-bind:customid="id">{{message}}</p>
+    </div>
+    <script>
+        // 数据
+        let data = {
+            message: 'hello',
+            id: "ele"
+        }
+
+        // Vm实例
+       var vm = new Vue({
+           el: '#demo',
+           data: data,
+           methods: {
+               clickHandle(){
+                   alert('click')
+               }
+           }
+       })
+       // console.log(vm.$data)
+    </script>
+</body>
+</html>

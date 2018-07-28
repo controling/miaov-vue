@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+    <style>
+        .red{
+            color: #ff0000;
+        }
+        .fontSize{
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 模板 -->
+    <div id="demo">
+        <!-- key为className, value为布尔值 -->
+        <span class="fontSize" :class="{red: addClass}">你好</span>
+    </div>
+    <script>
+        // 数据
+        let data = {
+            addClass: true
+        }
+
+        // Vm实例
+        new Vue({
+            el: '#demo',
+            data: data
+        })
+
+    </script>
+</body>
+
+</html>
