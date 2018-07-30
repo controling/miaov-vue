@@ -2,10 +2,10 @@
 
 var store = {
     save(key, value){
-        localStorage.setItem(key, JSON.stringify(value))
+        window.localStorage.setItem(key, JSON.stringify(value))
     },
     fetch(key){
-        return JSON.parse(localStorage.getItem(key)) || []
+        return JSON.parse(window.localStorage.getItem(key)) || []
     }
 }
 
@@ -22,13 +22,31 @@ var list = store.fetch('todoList')
     }
 ] */
 
-new Vue({
+// 筛选数据有三种情况all, finished, unfinished
+var filter = {
+    all: function(list){
+        return list
+    },
+    finished: function(list){
+        return list.filter(function(item){
+            return item.isChecked
+        })
+    },
+    unfinished: function(list){
+        return list.filter(function(item){
+            return !item.isChecked
+        })
+    }
+}
+
+ var vm = new Vue({
     el: '.main',
     data: {
         list: list,
         todo: '',
         editFlag: '', // 记录当前正在编辑的todo
-        beforeTitle: '' // 记录当前正在编辑的title
+        beforeTitle: '', // 记录当前正在编辑的title
+        visibility: 'all' // 通过这个属性值的变化对数据进行筛选
     },
     watch: {
         // 监控list属性, 当list属性对应的值发生变化是就会执行函数
@@ -49,6 +67,9 @@ new Vue({
             return this.list.filter(item => {
                 return !item.isChecked
             }).length
+        },
+        filteredList: function(){
+            return filter[this.visibility] ? filter[this.visibility](list) : list
         }
     },
     methods: {
@@ -96,3 +117,12 @@ new Vue({
         }
     }
 })
+
+function watchHashChange(){
+    var hash = window.location.hash.slice(1)
+    vm.visibility = hash
+}
+
+watchHashChange()
+
+window.addEventListener('hashchange', watchHashChange)
