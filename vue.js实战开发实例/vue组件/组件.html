@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <script src="../vue.js"></script>    
+    <title>组件</title>
+</head>
+<body>
+    <div id="app">
+        <h4>自定义下拉框</h4>
+        <custom-select btn-value="查询"></custom-select>
+        <custom-select btn-value="搜索"></custom-select>
+    </div>
+    <script>
+        
+        // 注册组件
+        Vue.component('custom-select', {
+            // data需要写成函数形式, 避免组件之间数据相互影响
+            data(){
+                return {
+                    selectShow: false
+                }
+            },
+            // 接收模板传过来的数据, 驼峰命名
+            props: ['btnValue'],
+            template: `<section class="warp">
+					<div class="searchIpt clearFix">
+						<div class="clearFix">
+							<input type="text" class="keyWord" value="" @click="selectShow = !selectShow"/>
+							<input type="button" :value="btnValue">
+							<span></span>
+						</div>
+						<custom-list v-show="selectShow"></custom-list>
+					</div>
+				</section>`
+        })
+
+        Vue.component('custom-list', {
+            template: `<ul class="list">
+							<li>html+css</li>
+							<li>html5+css3</li>
+							<li>javascript</li>
+							<li>angular</li>
+							<li>react</li>
+							<li>vue</li>
+							<li>jquery</li>
+							<li>nodejs</li>
+						</ul>`
+        })
+
+        new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>
