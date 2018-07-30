@@ -1,4 +1,17 @@
-var list = [
+// 存取localStorage数据
+
+var store = {
+    save(key, value){
+        localStorage.setItem(key, JSON.stringify(value))
+    },
+    fetch(key){
+        return JSON.parse(localStorage.getItem(key)) || []
+    }
+}
+
+var list = store.fetch('todoList')
+
+/* var list = [
     {
         'title': '标题1',
         isChecked: false // 为true时, 任务完成
@@ -7,7 +20,7 @@ var list = [
         'title': '标题2',
         isChecked: true
     }
-]
+] */
 
 new Vue({
     el: '.main',
@@ -16,6 +29,20 @@ new Vue({
         todo: '',
         editFlag: '', // 记录当前正在编辑的todo
         beforeTitle: '' // 记录当前正在编辑的title
+    },
+    watch: {
+        // 监控list属性, 当list属性对应的值发生变化是就会执行函数
+        /* list(){
+            store.save('todoList', this.list)
+        } */
+
+        // 深度监控
+        list: {
+            handler(){
+                store.save('todoList', this.list)                
+            },
+            deep: true
+        }
     },
     computed:{
         noCheckedLen(){
