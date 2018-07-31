@@ -67,7 +67,7 @@ props验证
         propD: {
             type: Number,
             default: 0
-        }, // 设置默认值
+        }, // 设置默认值 default 可以为函数
         propE: {
             validator: function(value){
                 value 为propE的值
@@ -75,4 +75,20 @@ props验证
         } // 自定义验证规则
     }
 
-            
+slot分发内容
+    使用一种方式混合父组件的内容与子组件的模板, 这种方式叫'内容分发'
+    在子组件中使用特殊元素<slot>作为内容的插槽
+    这样会使组件的扩展性更强
+    单个slot
+        在子组件中有slot标签, 被视为备用内容, 在父组件不提供内容的情况下使用.
+        如果父组件提供内容, 则把整个内容片段插入到slot所在的DOM位置, 并替换掉slot标签本身
+        <custom><div>父组件提供内容</div></custom>
+        template: `<slot>子组件的slot标签</slot>`
+
+    具名slot
+        <slot>元素可以用一个特殊的属性name来配置如何分发内容
+        可以使用一个匿名的slot处理那些没有对应slot的内容
+    
+    编译作用域
+        父组件模板的内容在父组件作用域内编译
+        子组件模板的内容在子组件作用域内编译        
