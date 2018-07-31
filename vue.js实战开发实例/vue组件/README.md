@@ -55,4 +55,24 @@ Vue组件
         1.作为data中局部数据的初始值使用
         2.作为子组件中的computed属性
 
+props验证
+    组件可以为props指定验证要求, 验证类型为 Number, String, Function, Object, Array, Boolean
+    props: {
+        propA: Number,   // 指定类型
+        propB: [Number, String], // 指定多种类型
+        propC: {
+            type: String,
+            required: true
+        }, // 必填并且为字符串
+        propD: {
+            type: Number,
+            default: 0
+        }, // 设置默认值
+        propE: {
+            validator: function(value){
+                value 为propE的值
+            }
+        } // 自定义验证规则
+    }
+
             
