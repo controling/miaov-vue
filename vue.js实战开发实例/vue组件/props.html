@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <custom-component :count="count"></custom-component>
+    </div>
+    <script>
+        Vue.component('custom-component', {
+            props: ['count'],
+            data(){
+                return {
+                    incrementCount: this.count // this.count为父级传过来的count, 并保存到组件中的data作为初始值
+                }
+            },
+            template: `<div>
+                        <h2>自定义组件</h2>
+                        <input type="button" value="改变count的值" @click="changeCount">
+                        {{incrementCount}}
+                    </div>`,
+            methods: {
+                changeCount(){
+                    this.incrementCount++
+                }
+            }
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            }
+        })
+    </script>
+</body>
+</html>
