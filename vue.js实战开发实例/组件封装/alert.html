@@ -216,6 +216,7 @@
 				`,
             methods: {
                 closeHandle(){
+                    // 触发父组件关心的自定义事件(close-click)
                     this.$emit('close-click')
                 }
             }
